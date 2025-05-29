@@ -10,7 +10,12 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "test.sam.modern-chat"
+      "bundleIdentifier": "test.sam.modernchat",
+      "associatedDomains": [
+        "applinks:chief-chimp-40.clerk.accounts.dev",
+        // "applinks:chief-chimp-40.clerk.accounts.staging",
+        "webcredentials:chief-chimp-40.clerk.accounts.dev"
+      ]
     },
     "android": {
       "adaptiveIcon": {
@@ -18,7 +23,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "test.sam.modern-chat"
+      "package": "test.sam.modernchat"
     },
     "web": {
       "bundler": "metro",
@@ -38,7 +43,14 @@
       ],
       "expo-secure-store",
       "expo-web-browser",
-      "expo-build-properties"
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "16.0"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
