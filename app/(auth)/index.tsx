@@ -1,3 +1,4 @@
+import TextUI from '@/components/Text';
 import React from 'react';
 import { Text, View } from 'react-native';
 
@@ -13,7 +14,7 @@ const index = () => {
       <View className="mt-4 p-4 bg-green-100 rounded-lg">
         <Text className="text-green-800">Enjoy your conversations!</Text>
       </View>
-      <Text>Chat indexjfjfk well, take premicy</Text>
+      <TextUI className="text-2xl">Chat indexjfjfk well, take premicy</TextUI>
     </View>
   );
 };
