@@ -1,22 +1,27 @@
 import { cn } from '@/utils/cn';
 import React from 'react';
-import { Text, TextProps, View } from 'react-native';
+import { Text as RNText, TextProps, View } from 'react-native';
 
 interface TextComponentProps extends TextProps {
   children: React.ReactNode;
 }
 
-const TextUI: React.FC<TextComponentProps> = ({ children, style, className = '', ...props }) => {
+const Text: React.FC<TextComponentProps> = ({
+  children,
+  style,
+  className = '',
+  ...props
+}: TextComponentProps) => {
   return (
     <View>
-      <Text
+      <RNText
         // style={[{ fontSize: 16, color: '#000' }, style]}
         {...props}
-        className={cn('text-base text-black', className)}
+        className={cn('text-base text-white', className)}
       >
         {children}
-      </Text>
+      </RNText>
     </View>
   );
 };
-export default TextUI;
+export default Text;
