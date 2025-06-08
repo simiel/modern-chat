@@ -9,6 +9,7 @@ module.exports = {
         secondary: '#262626',
         red: '#FF3B30',
         'red-secondary': '#441320',
+        gold: '#FFD700',
       },
     },
   },

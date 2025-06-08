@@ -1,7 +1,9 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-const index = () => {
+const Index = () => {
+  const router = useRouter();
   return (
     <View className="flex-1 items-center justify-center">
       <Text className="text-2xl font-bold">Chat</Text>
@@ -13,9 +15,17 @@ const index = () => {
       <View className="mt-4 p-4 bg-green-100 rounded-lg">
         <Text className="text-green-800">Enjoy your conversations!</Text>
       </View>
-      <Text>Chat indexjfjfk ici bienb</Text>
+
+      <TouchableOpacity
+        onPress={() => {
+          router.push('/(chat)/profile');
+        }}
+        style={{ marginTop: 20, padding: 10, borderRadius: 5 }}
+      >
+        <Text className="text-white bg-blue-500 p-2 rounded">Go to Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default index;
+export default Index;

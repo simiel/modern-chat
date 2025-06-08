@@ -1,6 +1,6 @@
-import { cn } from '@/utils/cn';
 import React from 'react';
 import { Text as RNText, TextProps, View } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
 interface TextComponentProps extends TextProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface TextComponentProps extends TextProps {
 const Text: React.FC<TextComponentProps> = ({
   children,
   style,
-  className = '',
+  className,
   ...props
 }: TextComponentProps) => {
   return (
@@ -17,7 +17,7 @@ const Text: React.FC<TextComponentProps> = ({
       <RNText
         // style={[{ fontSize: 16, color: '#000' }, style]}
         {...props}
-        className={cn('text-base text-white', className)}
+        className={twMerge(`text-white text-base`, className)}
       >
         {children}
       </RNText>
