@@ -66,7 +66,11 @@ const Index = () => {
       ))}
 
       <View style={{ gap: 10, marginTop: 'auto', width: '100%' }}>
-        <Button className="mt-auto bg-black" textClassName="font-extrabold">
+        <Button
+          className="mt-auto bg-black"
+          textClassName="font-extrabold"
+          onPress={handleSignInWithPasskey}
+        >
           Sign in with Passkey
         </Button>
         <Button className=" bg-black" onPress={handleSignInWithGoogle}>
