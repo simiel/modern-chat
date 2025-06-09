@@ -53,6 +53,19 @@ export default function Layout() {
         }}
       />
       <Stack.Screen name="[chat]" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="settings/[chat]"
+        options={{
+          headerTitle: 'Settings',
+          headerLargeTitle: true,
+          presentation: 'modal',
+          headerLeft: () => (
+            <Link href="../">
+              <IconSymbol name="chevron.left" />
+            </Link>
+          ),
+        }}
+      />
     </Stack>
   );
 }

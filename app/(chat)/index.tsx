@@ -18,7 +18,7 @@ const Index = () => {
 
       <TouchableOpacity
         onPress={() => {
-          router.push('/(chat)/profile');
+          router.push('/settings/[chat]');
         }}
         style={{ marginTop: 20, padding: 10, borderRadius: 5 }}
       >
