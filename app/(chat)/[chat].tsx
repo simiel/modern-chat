@@ -3,9 +3,9 @@ import React from 'react';
 import { SafeAreaView, Text } from 'react-native';
 
 const Chat = () => {
-  const { chat } = useLocalSearchParams();
+  const { chat: chatId } = useLocalSearchParams();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
       <Text
         style={{
           flex: 1,
@@ -13,10 +13,10 @@ const Chat = () => {
           fontSize: 24,
           fontWeight: 'bold',
           marginTop: 20,
-          color: '#333',
+          color: '#fff',
         }}
       >
-        {chat ? `Chat Room: ${chat}` : 'Chat Room Not Found'}
+        {chatId ? `Chat Room: ${chatId}` : 'Chat Room Not Found'}
       </Text>
     </SafeAreaView>
   );

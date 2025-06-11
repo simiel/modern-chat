@@ -11,7 +11,6 @@ const Index = () => {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    // Simulate a network request
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
@@ -22,7 +21,7 @@ const Index = () => {
       data={chatRooms}
       keyExtractor={item => item.id}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#FF0000']} />
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['red', 'white']} />
       }
       renderItem={({ item }) => (
         <Link
