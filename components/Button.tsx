@@ -1,25 +1,33 @@
 import React from 'react';
-import { Pressable, PressableProps, Text } from 'react-native';
+import { Pressable, PressableProps, StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
 
 interface ButtonProps extends PressableProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
-  textClassName?: string;
+  textStyle?: TextStyle;
+  style?: PressableProps['style'];
 }
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  className = '',
-  textClassName = '',
-  ...props
-}) => {
+const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+  const { style, textStyle, ...rest } = props;
   return (
     <Pressable
-      className={`px-4 py-4 w-full rounded-2xl bg-white items-center justify-center ${className}`}
+      style={[
+        {
+          backgroundColor: '#fff', // Black background
+          padding: 12,
+          borderRadius: 8,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderWidth: 1,
+          borderColor: '#000', // White border
+        },
+        style as ViewStyle,
+      ]}
       {...props}
     >
       {typeof children === 'string' ? (
-        <Text className={`text-black ${textClassName}`}>{children}</Text>
+        <Text style={StyleSheet.flatten([{}, textStyle])}>{children}</Text>
       ) : (
         children
       )}
