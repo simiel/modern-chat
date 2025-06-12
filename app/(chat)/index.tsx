@@ -1,13 +1,39 @@
 import { IconSymbol } from '@/components/IconSymbol';
+import { appwriteConfig, db } from '@/utils/appwrite';
 import { Grey, Secondary } from '@/utils/colors';
-import { chatRooms } from '@/utils/test-data';
+import { ChatRoom } from '@/utils/types';
 import { Link } from 'expo-router';
 import React from 'react';
 import { FlatList, RefreshControl, Text, View } from 'react-native';
+import { Query } from 'react-native-appwrite';
 
 const Index = () => {
   // const router = useRouter();
+  const [chatRooms, setChatRooms] = React.useState<ChatRoom[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
+
+  const fetchChatRooms = async () => {
+    try {
+      const { documents, total } = await db.listDocuments(
+        appwriteConfig.db,
+        appwriteConfig.col.chatrooms!,
+        [Query.limit(100)]
+      );
+
+      if (total > 0) {
+        console.log('Chat rooms fetched:', documents);
+        setChatRooms(documents);
+      } else {
+        setChatRooms([]);
+      }
+    } catch (error) {
+      console.error('Error fetching chat rooms:', error);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchChatRooms();
+  }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

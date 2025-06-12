@@ -10,7 +10,7 @@ const appwriteConfig = {
   endpoint: process.env.EXPO_PUBLIC_CLERK_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1',
   projectId: process.env.EXPO_PUBLIC_CLERK_APPWRITE_APP_ID,
   platform: 'test.simiel.modernchat',
-  db: process.env.EXPO_PUBLIC_CLERK_APPWRITE_APP_ID,
+  db: process.env.EXPO_PUBLIC_CLERK_APPWRITE_DATABASE_ID,
   col: {
     chatrooms: process.env.EXPO_PUBLIC_CLERK_APPWRITE_CHATROOMS_ID,
     messages: process.env.EXPO_PUBLIC_CLERK_APPWRITE_MESSAGES_ID,
