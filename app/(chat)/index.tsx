@@ -15,14 +15,14 @@ const Index = () => {
   const fetchChatRooms = async () => {
     try {
       const { documents, total } = await db.listDocuments(
-        appwriteConfig.db,
+        appwriteConfig.db!,
         appwriteConfig.col.chatrooms!,
         [Query.limit(100)]
       );
 
       if (total > 0) {
         console.log('Chat rooms fetched:', documents);
-        setChatRooms(documents);
+        setChatRooms(documents as ChatRoom[]);
       } else {
         setChatRooms([]);
       }
@@ -45,7 +45,7 @@ const Index = () => {
   return (
     <FlatList
       data={chatRooms}
-      keyExtractor={item => item.id}
+      keyExtractor={item => item.$id}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['red', 'white']} />
       }
@@ -53,9 +53,10 @@ const Index = () => {
         <Link
           href={{
             pathname: `/[chat]`,
-            params: { chat: item.id },
+            params: { chat: item.$id },
           }}
           style={{}}
+          key={item.$id}
         >
           <View
             style={{
