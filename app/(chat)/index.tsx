@@ -36,10 +36,15 @@ const Index = () => {
   }, []);
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
+    try {
+      setRefreshing(true);
+      fetchChatRooms();
+      console.log('Chat rooms refreshed');
+    } catch (error) {
+      console.error('Error refreshing chat rooms:', error);
+    } finally {
       setRefreshing(false);
-    }, 2000);
+    }
   }, []);
 
   return (
