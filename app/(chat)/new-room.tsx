@@ -1,10 +1,12 @@
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Text from '@/components/Text';
+import { appwriteConfig, db } from '@/utils/appwrite';
 import { Secondary } from '@/utils/colors';
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, View } from 'react-native';
+import { ID } from 'react-native-appwrite';
 
 const COLORS = {
   primary: '#000', // Black background
@@ -25,22 +27,29 @@ const NewRoom = () => {
   const disabled = !roomName.trim() || loading;
 
   const handleCreateRoom = async () => {
-    if (!roomName.trim()) {
-      setError('Room name is required');
-      return;
-    }
-    setError('');
-    setLoading(true);
+    console.log('Creating room with name:', roomName, 'and description:', roomDescription);
+
     try {
+      if (!roomName.trim()) {
+        setError('Room name is required');
+        return;
+      }
+      setError('');
+      setLoading(true);
       // Replace this with your actual create room logic
-      setTimeout(() => {
-        setLoading(false);
-        Alert.alert('Success', 'Room created!');
-        router.back();
-      }, 1200);
-    } catch (e) {
+      await db.createDocument(appwriteConfig.db!, appwriteConfig.col.chatrooms!, ID.unique(), {
+        name: roomName.trim(),
+        description: roomDescription.trim(),
+        // createdAt: new Date().toISOString(),
+      });
+      // Alert.alert('Success', 'Room created!');
+      router.back();
       setLoading(false);
+    } catch (e) {
       setError('Failed to create room. Try again.');
+      setLoading(false);
+    } finally {
+      // setLoading(false);
     }
   };
 
