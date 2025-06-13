@@ -20,7 +20,7 @@ interface Message {
   senderId: string;
   senderName: string;
   senderImageUrl: string;
-  chatRoomId: string;
+  chatroomId: string;
 }
 
 interface User {
