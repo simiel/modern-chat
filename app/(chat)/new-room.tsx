@@ -38,18 +38,19 @@ const NewRoom = () => {
       setLoading(true);
       // Replace this with your actual create room logic
       await db.createDocument(appwriteConfig.db!, appwriteConfig.col.chatrooms!, ID.unique(), {
-        name: roomName.trim(),
+        title: roomName.trim(),
         description: roomDescription.trim(),
         // createdAt: new Date().toISOString(),
       });
       // Alert.alert('Success', 'Room created!');
       router.back();
-      setLoading(false);
-    } catch (e) {
-      setError('Failed to create room. Try again.');
-      setLoading(false);
-    } finally {
       // setLoading(false);
+    } catch (e) {
+      console.error('Error creating room:', e);
+      setError('Failed to create room. Try again.');
+      // setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
