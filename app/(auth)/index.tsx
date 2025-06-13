@@ -1,7 +1,7 @@
 import logo from '@/assets/images/logo.png';
 import Button from '@/components/Button';
 import Text from '@/components/Text';
-import { isClerkAPIResponseError, useSignIn, useSSO, useUser } from '@clerk/clerk-expo';
+import { isClerkAPIResponseError, useSignIn, useSSO } from '@clerk/clerk-expo';
 import { ClerkAPIError } from '@clerk/types';
 import * as AuthSession from 'expo-auth-session';
 import React from 'react';
@@ -10,7 +10,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   const { startSSOFlow } = useSSO();
-  const { isSignedIn } = useUser();
   const { signIn, setActive } = useSignIn();
   const [errors, setErrors] = React.useState<ClerkAPIError[]>([]);
 
@@ -37,12 +36,18 @@ const Index = () => {
 
   const handleSignInWithPasskey = async () => {
     try {
-      const signinAttempt = await signIn?.authenticateWithPasskey({ flow: 'discoverable' });
+      const signInAttempt = await signIn?.authenticateWithPasskey({
+        flow: 'discoverable',
+      });
 
-      if (signinAttempt?.status === 'complete' && setActive) {
-        await setActive({ session: signinAttempt.createdSessionId });
+      if (signInAttempt?.status === 'complete') {
+        if (setActive !== undefined) {
+          await setActive({ session: signInAttempt.createdSessionId });
+        }
       } else {
-        console.log('Sign in not completed');
+        // If the status is not complete, check why. User may need to
+        // complete further steps.
+        console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (error) {
       if (isClerkAPIResponseError(error)) {
