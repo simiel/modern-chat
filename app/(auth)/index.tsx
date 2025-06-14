@@ -34,27 +34,26 @@ const Index = () => {
     }
   };
 
-  const handleSignInWithPasskey = async () => {
+  const signInWithPasskey = async () => {
+    // 'discoverable' lets the user choose a passkey
+    // without auto-filling any of the options
     try {
       const signInAttempt = await signIn?.authenticateWithPasskey({
         flow: 'discoverable',
       });
 
       if (signInAttempt?.status === 'complete') {
-        if (setActive !== undefined) {
-          await setActive({ session: signInAttempt.createdSessionId });
-        }
+        await setActive!({ session: signInAttempt.createdSessionId });
+        // router.push('/')
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
-    } catch (error) {
-      if (isClerkAPIResponseError(error)) {
-        setErrors(error.errors);
-      } else {
-        console.error('An unexpected error occurred:', error);
-      }
+    } catch (err) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      console.error('Error:', JSON.stringify(err, null, 2));
     }
   };
 
@@ -71,11 +70,7 @@ const Index = () => {
       ))}
 
       <View style={{ gap: 10, marginTop: 'auto', width: '100%' }}>
-        <Button
-          className="mt-auto bg-black"
-          textClassName="font-extrabold"
-          onPress={handleSignInWithPasskey}
-        >
+        <Button className="mt-auto bg-black" onPress={signInWithPasskey}>
           Sign in with Passkey
         </Button>
         <Button className=" bg-black" onPress={handleSignInWithGoogle}>

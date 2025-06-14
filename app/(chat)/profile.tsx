@@ -24,6 +24,22 @@ const Profile = () => {
         <Text style={styles.name}>{user?.fullName}</Text>
       </View>
       <Button onPress={handleSignOut}> Sign Out</Button>
+
+      {/* add passkey */}
+      <Button
+        onPress={async () => {
+          try {
+            await user?.createPasskey();
+            console.log('Passkey created');
+          } catch (error) {
+            console.error(error);
+          }
+        }}
+        style={{ marginTop: 16, backgroundColor: '#007AFF' }}
+      >
+        Add Passkey
+      </Button>
+
       <View style={{ width: '90%', marginTop: 24 }}>
         {passkeys.length > 0 ? (
           <View style={{ marginBottom: 16 }}>

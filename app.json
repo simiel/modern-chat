@@ -13,7 +13,6 @@
       "bundleIdentifier": "test.sam.modernchat",
       "associatedDomains": [
         "applinks:chief-chimp-40.clerk.accounts.dev",
-        // "applinks:chief-chimp-40.clerk.accounts.staging",
         "webcredentials:chief-chimp-40.clerk.accounts.dev"
       ]
     },
@@ -47,7 +46,7 @@
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "16.0"
+            "deploymentTarget": "16.0" //  iOS Support passkeys from version iOS 16+
           }
         }
       ]
