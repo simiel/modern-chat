@@ -1,0 +1,8 @@
+[AuthenticationServices] ASAuthorizationController credential request failed with error: Error Domain=com.apple.AuthenticationServices.AuthorizationError
+Code=1004 "(null)"
+[modernchat.debug.dylib] Error: ["NSLocalizedFailureReason": Application with identifier W8FX73937T.test.sam.modernchat is not associated with domain
+chief-chimp-40.clerk.accounts.dev]
+ ERROR  [ClerkRuntimeError: 🔒 Clerk: An unknown error occurred.
+
+(code="passkey_registration_failed")
+]
